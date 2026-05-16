@@ -1,0 +1,52 @@
+import { createFilterMatrix, Matrix } from "./utils/matrix";
+import { cssFilterStyleSheetTemplate } from "./css-filter";
+import { isFirefox } from "../utils/platform";
+
+export function createSVGFilterStylesheet(config, url, isTopFrame, fixes, index) {
+    let filterValue;
+    let reverseFilterValue;
+    if (isFirefox) {
+        filterValue = getEmbeddedSVGFilterValue(getSVGFilterMatrixValue(config));
+        reverseFilterValue = getEmbeddedSVGFilterValue(getSVGReverseFilterMatrixValue());
+    } else {
+        // Chrome fails with "Unsafe attempt to load URL ... Domains, protocols and ports must match.
+        filterValue = "url(#dark-reader-filter)";
+        reverseFilterValue = "url(#dark-reader-reverse-filter)";
+    }
+    return cssFilterStyleSheetTemplate(
+        filterValue,
+        reverseFilterValue,
+        config,
+        url,
+        isTopFrame,
+        fixes,
+        index
+    );
+}
+
+function getEmbeddedSVGFilterValue(matrixValue) {
+    const id = "dark-reader-filter";
+    const svg = [
+        '<svg xmlns="http://www.w3.org/2000/svg">',
+        `<filter id="${id}" style="color-interpolation-filters: sRGB;">`,
+        `<feColorMatrix type="matrix" values="${matrixValue}" />`,
+        "</filter>",
+        "</svg>",
+    ].join("");
+    return `url(data:image/svg+xml;base64,${btoa(svg)}#${id})`;
+}
+
+function toSVGMatrix(matrix) {
+    return matrix
+        .slice(0, 4)
+        .map((m) => m.map((m) => m.toFixed(3)).join(" "))
+        .join(" ");
+}
+
+export function getSVGFilterMatrixValue(config) {
+    return toSVGMatrix(createFilterMatrix(config));
+}
+
+export function getSVGReverseFilterMatrixValue() {
+    return toSVGMatrix(Matrix.invertNHue());
+}

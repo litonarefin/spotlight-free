@@ -1,0 +1,654 @@
+@use "@sjmc11/tourguidejs/src/scss/tour.scss";
+
+$cardBg: #1a202c;
+$primary: #e2e8f0;
+$secondary: #718096;
+$buttonBg: #4a5568;
+$buttonText: #cbd5e0;
+$show: #10182814;
+$border: #4a5568;
+$hover: #4a5568;
+$hoverTransparent: #4a55685e;
+$defaultKey: #a0aec0;
+$customKey: #f7fafc;
+$oddChild: #1f2733;
+
+@mixin tagBadgeStyle {
+  span {
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    color: $defaultKey;
+  }
+  .jltwp-spotlight-tag-badge {
+    border-radius: 4px;
+    border: 1px solid $buttonBg;
+    background-color: $cardBg;
+  }
+}
+
+body {
+  background-color: #edf2f7;
+}
+
+#jltwp-spotlight {
+  .jltwp-spotlight-search-form-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999999999;
+    width: 100vw;
+    height: 100vh;
+    .jltwp-spotlight-search-form-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.629);
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+
+      .jltwp-spotlight-search-wrapper {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: max-content;
+        transform: translate(-50%, -50%);
+        .jltwp-spotlight-search {
+          width: 584px;
+          height: max-content;
+          border-radius: 8px;
+          box-shadow: 0 16px 12px $show;
+          background-color: $cardBg;
+
+          .jltwp-spotlight-search-header {
+            position: relative;
+            > p {
+              position: absolute;
+              top: 8px;
+              right: 16px;
+              font-size: 12px;
+              font-weight: 500;
+              line-height: 16px;
+              color: $secondary;
+              text-align: right;
+              margin: 0;
+              padding-top: 8px;
+              padding-right: 16px;
+            }
+
+            .jltwp-spotlight-search-action {
+              padding: 16px 24px;
+              border: 1px solid $border;
+              border-radius: 8px;
+
+              .jltwp-spotlight-selected-category-wrapper {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 1rem;
+
+                .jltwp-spotlight-selected-category {
+                  display: flex;
+                  align-items: center;
+                  gap: 6px;
+
+                  font-size: 12px;
+                  font-weight: 500;
+                  line-height: 16px;
+                  color: $buttonText;
+                  padding: 4px 8px;
+                  outline: none;
+                  border: 0;
+                  border-radius: 2px;
+                  background-color: $buttonBg;
+                  cursor: default;
+
+                  span.jltwp-spotlight-category-close {
+                    display: flex;
+                    cursor: pointer;
+                    svg {
+                      width: 10px;
+                      height: 10px;
+                      color: $primary;
+                    }
+                  }
+                }
+              }
+
+              .jltwp-spotlight-search-input {
+                display: flex;
+                align-items: center;
+                > svg {
+                  margin-right: 8px;
+                  width: 16px;
+                  height: 16px;
+                  stroke: #e2e8f0;
+                }
+                input {
+                  width: 100%;
+                  padding: 0;
+                  font-size: 16px;
+                  font-weight: 500;
+                  line-height: 28px;
+                  color: #edf2f7;
+                  outline: none;
+                  border: none;
+
+                  background-color: transparent;
+
+                  &::placeholder {
+                    color: $secondary;
+                  }
+
+                  &:focus {
+                    box-shadow: none !important;
+                  }
+                }
+              }
+            }
+          }
+
+          .jltwp-spotlight-search-body {
+            padding: 8px;
+            position: relative;
+
+            ul {
+              max-height: 280px;
+              overflow-y: scroll;
+              overflow-x: hidden;
+              padding: 0;
+              margin: 0;
+              list-style: none;
+
+              li {
+                margin-top: 4px;
+
+                a {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  gap: 6px;
+                  width: 93%;
+                  border-radius: 4px;
+                  padding: 8px 16px;
+                  text-decoration: none;
+
+                  font-size: 14px;
+                  font-weight: 500;
+                  line-height: 24px;
+                  color: $primary;
+                  transition: all 0.1s;
+
+                  svg {
+                    width: 12px;
+                    height: 12px;
+                    color: $primary;
+                  }
+
+                  &:focus {
+                    box-shadow: none;
+                    outline: none;
+                    background-color: $hover !important;
+
+                    .jltwp-spotlight-direction {
+                      > svg {
+                        stroke: #888c94;
+                      }
+                    }
+                  }
+
+                  .jltwp-spotlight-title-wrapper {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+
+                    svg {
+                      width: 16px;
+                      height: 16px;
+                    }
+
+                    figure {
+                      margin: 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    }
+
+                    .jltwp-spotlight-status-on {
+                      position: relative;
+                      margin-right: 8px;
+                      &::before {
+                        position: absolute;
+                        content: "";
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: #049b04;
+                        top: 0;
+                        bottom: 0;
+                        margin: auto;
+                      }
+                    }
+                    .jltwp-spotlight-status-off {
+                      position: relative;
+                      margin-right: 8px;
+                      &::before {
+                        position: absolute;
+                        content: "";
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: #da0202;
+                        top: 0;
+                        bottom: 0;
+                        margin: auto;
+                      }
+                    }
+
+                    .jltwp-spotlight-direction {
+                      display: flex;
+                      > svg {
+                        stroke: #4a5568;
+                        transition: all 0.1s;
+                        width: 12px;
+                        height: 12px;
+                      }
+                    }
+                  }
+
+                  &:hover {
+                    background-color: $hoverTransparent;
+                    .jltwp-spotlight-direction {
+                      > svg {
+                        stroke: #888c94;
+                      }
+                    }
+                  }
+
+                  &.jltwp-spotlight-active {
+                    background-color: $hover;
+                    .jltwp-spotlight-direction {
+                      > svg {
+                        stroke: #888c94;
+                      }
+                    }
+
+                    // Pro Badge Active BG SCSS
+                    .jltwp-spotlight-pro-badge {
+                      background: #1f2733;
+                    }
+                  }
+
+                  .jltwp-spotlight-tags {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+
+                    span {
+                      font-size: 12px;
+                      font-weight: 500;
+                      line-height: 16px;
+                      color: #e2e8f0;
+
+                      &.jltwp-spotlight-tag-badge {
+                        background: #1f2733;
+                        border: 1px solid #4a5568;
+                        border-radius: 2px;
+                        padding: 4px 8px;
+                      }
+                    }
+                  }
+
+                  // Pro Badge SCSS
+                  .jltwp-spotlight-pro-badge {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    padding: 5px 8px;
+                    border-radius: 4px;
+                    line-height: 1.3;
+                    background: $hover;
+                    transition: all 0.1s;
+                  }
+                }
+
+                &:first-child {
+                  margin-top: 0;
+                }
+                &.jltwp-spotlight-not-data {
+                  font-size: 1rem;
+                  text-align: center;
+                  margin-top: 1rem;
+                  color: $buttonText;
+                }
+              }
+
+              &::-webkit-scrollbar {
+                width: 6px;
+                border-radius: 16px;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                border-radius: 8px;
+                background: $secondary;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* PRO features overlay styles */
+  .jltwp-spotlight-pro-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #000000b2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99999999;
+    > div {
+      > a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 24px;
+        text-decoration: none;
+        > span {
+          background: #f79009;
+          padding: 2px 8px;
+          border-radius: 4px;
+          color: #171923;
+        }
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  .jltwp-spotlight-file-uploader {
+    padding: 8px;
+    > button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      height: 168px;
+      background: #0000006e;
+      border-radius: 8px;
+      border: 1px solid $border;
+      transition: all 0.15s;
+      position: relative;
+      cursor: pointer;
+      &.jltwp-spotlight-file-dragging {
+        background: rgba(41, 117, 249, 0.606);
+      }
+      > input {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 2;
+      }
+      > p {
+        position: absolute;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        span {
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: $primary;
+        }
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+
+          path {
+            stroke: $primary;
+          }
+        }
+      }
+    }
+  }
+
+  .jltwp-spotlight-uploaded-media {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    > figure {
+      margin: 0;
+      img {
+        width: 68px;
+        height: 68px;
+      }
+    }
+  }
+
+  .jltwp-spotlight-settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99999999999;
+
+    .jltwp-spotlight-settings-wrapper {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .jltwp-spotlight-setting {
+        width: 60%;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 16px 12px $show;
+        background-color: $cardBg;
+
+        .jltwp-spotlight-setting-header {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          align-content: center;
+          padding: 16px;
+
+          span {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: $buttonText;
+
+            &:last-child {
+              text-align: right;
+            }
+          }
+        }
+
+        .jltwp-spotlight-setting-body {
+          padding: 8px;
+
+          .jltwp-spotlight-settings-items {
+            margin: 0;
+            .jltwp-spotlight-settings-item {
+              a {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                align-items: center;
+                grid-row: 4px;
+                padding: 4px 16px;
+                border-radius: 4px;
+                text-decoration: none;
+                transition: all 0.3s ease-in-out;
+
+                .jltwp-spotlight-item-title {
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+
+                  span {
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 24px;
+                    color: $primary;
+                  }
+
+                  svg {
+                    width: 12px;
+                    height: 12px;
+                    stroke: $primary;
+                  }
+                }
+
+                .jltwp-spotlight-default-key {
+                  width: max-content;
+                  @include tagBadgeStyle();
+                }
+
+                .jltwp-spotlight-custom-key-wrapper {
+                  display: flex;
+                  align-items: center;
+                  justify-content: right;
+
+                  .jltwp-spotlight-custom-key {
+                    @include tagBadgeStyle;
+                    border: 1px solid #4a5568;
+                    border-radius: 4px;
+                    padding: 2px 15px;
+                    width: 78px;
+                    height: 20px;
+
+                    input {
+                      border-radius: 4px;
+                      border: 1px solid $buttonBg;
+                      background-color: $cardBg;
+                      padding: 2px 8px;
+                      font-size: 16px;
+                      font-weight: 500;
+                      line-height: 24px;
+                      color: #a0aec0;
+                      outline: none;
+                      width: 200px;
+                    }
+                    &:has(.jltwp-spotlight-tags span, input) {
+                      border: transparent;
+                      border-radius: inherit;
+                      padding: 0;
+                      width: auto;
+                      height: auto;
+                    }
+                  }
+                }
+
+                &:hover {
+                  background-color: $hover;
+
+                  .jltwp-spotlight-custom-key {
+                    background-color: $cardBg;
+
+                    &:has(.jltwp-spotlight-tags span, input) {
+                      background-color: transparent;
+                    }
+                  }
+                }
+              }
+
+              &:nth-child(odd) {
+                border-radius: 4px;
+                background-color: $oddChild;
+              }
+            }
+
+            &::-webkit-scrollbar {
+              width: 6px;
+              border-radius: 16px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              border-radius: 8px;
+              background: $secondary;
+            }
+          }
+        }
+
+        .jltwp-spotlight-setting-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px;
+
+          button {
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 14px;
+            outline: none;
+            border: 0;
+            cursor: pointer;
+          }
+
+          .jltwp-spotlight-restore-default {
+            padding: 6px 8px;
+            color: $primary;
+            background-color: $buttonBg;
+          }
+
+          .jltwp-spotlight-restore-done {
+            padding: 6px 16px;
+            color: $customKey;
+            background-color: #3a3ae9;
+          }
+        }
+      }
+    }
+  }
+}
+
+.jltwp-spotlight-backdrop {
+  z-index: 999999999999 !important;
+}
+
+.jltwp_spotlight_loading_overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+
+  .jltwp_loader {
+    pointer-events: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 3px solid #ffffff7a;
+    border-top-color: #fff;
+    animation: ani1 1s ease infinite;
+    @keyframes ani1 {
+      0% {
+        transform: rotate(0turn);
+      }
+      100% {
+        transform: rotate(1turn);
+      }
+    }
+  }
+}

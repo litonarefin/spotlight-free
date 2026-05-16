@@ -1,0 +1,1 @@
+{"name":"jeweltheme/spotlight","autoload":{"psr-4":{"WPSPOTLIGHT\\Inc\\":"Inc/","WPSPOTLIGHT\\Inc\\Admin\\":"Inc/Admin","WPSPOTLIGHT\\Libs\\":"Libs/"},"files":["Inc/functions.php","Inc/utils.php"]},"authors":[{"name":"Jewel Theme","email":"support@jeweltheme.com"}],"require":{},"require-dev":{}}

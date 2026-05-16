@@ -1,0 +1,24 @@
+== Changelog ==
+= 1.1.3 (30-12-2024) =
+* Fixed: Post Types infinity loading issue fixed
+* Fixed: Plugins and Themes drag & drop upload issue fixed
+
+= 1.1.2 (29-12-2024) =
+* Updated: Bug fixed
+
+= 1.1.1 (29-12-2024) =
+* Updated: Bug fixed
+
+= 1.1.0 (29-12-2024) =
+* Updated: Free Version fully released
+
+= 1.0.2 (10-11-2024) =
+* Updated: Free Version Updated
+
+= 1.0.1 (2-11-2024) =
+* Updated: Free Version Updated
+
+
+== Changelog ==
+= 1.0.0 (26-10-2024) =
+* Released: Initial Released
