@@ -52,8 +52,4 @@ mix
 
 // Script
 mix.js("dev/js/index.js", "assets/js/wp-spotlight.js").react().minify("assets/js/wp-spotlight.js");
-// Dark Mode Script
-mix
-  .js("dev/libs/dark-light-mode/darken.js", "Pro/assets/js/wp-spotlight-dark-light.js")
-  .react()
-  .minify("Pro/assets/js/wp-spotlight-dark-light.js");
+
