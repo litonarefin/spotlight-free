@@ -144,7 +144,7 @@ To build from source:
 
 1. Clone the repository: `git clone https://github.com/litonarefin/spotlight-free.git`
 2. Install dependencies: `npm install`
-3. Build production assets: `npm run prod`
+3. Build production assets: `npm run build`
 
 For development:
 1. Install dependencies: `npm install`

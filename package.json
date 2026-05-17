@@ -10,23 +10,11 @@
     "plugins"
   ],
   "scripts": {
-    "start": "mix watch",
-    "development": "mix",
-    "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "hot": "mix watch --hot",
-    "prod": "mix --production",
-    "dev": "cross-env NODE_ENV=development mix watch --mode development --progress",
-    "clean": "rm -rf assets/build/*",
-    "svg": "svgr -d assets/js/icons assets/icons",
-    "lint:php": "vendor/bin/phpcs",
-    "lint:php:fix": "vendor/bin/phpcbf",
-    "lint": "eslint assets/js/*",
-    "lint:fix": "eslint --fix assets/src/js/*",
-    "lint-css": "stylelint 'assets/sass/**/*.scss'",
-    "lint-css:fix": "npm run lint-css -- --fix",
-    "precommit": "npm run lint:php && npm run lint-css:fix && npm run lint:fix && npm run prod",
-    "cypress:open": "node_modules/.bin/cypress open"
+    "dev": "mix watch",
+    "build": "mix --production"
+  },
+  "overrides": {
+    "webpack": "5.95.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.26.3",
